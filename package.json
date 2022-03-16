@@ -36,7 +36,7 @@
     "singleQuote": false,
     "trailingComma": "es5"
   },
-  "name": "@napthedev/react-tuby",
+  "name": "react-tuby",
   "description": "A React video player library with YouTube-like UI",
   "author": "napthedev",
   "module": "dist/react-tuby.esm.js",
