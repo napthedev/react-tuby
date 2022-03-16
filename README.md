@@ -34,6 +34,13 @@ npm i react-tuby
 # yarn add react-tuby
 ```
 
+## Import
+
+```jsx
+import { Player } from "react-tuby";
+import "react-tuby/css/main.css";
+```
+
 ## Example player
 
 ```jsx
