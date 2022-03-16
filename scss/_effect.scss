@@ -1,0 +1,27 @@
+.tuby {
+  &-fade-zoom-out {
+    opacity: 0;
+    animation: tuby-fade-zoom-out 0.4s linear;
+  }
+
+  &-effect-icon {
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00000088;
+    border-radius: 99999px;
+  }
+}
+
+@keyframes tuby-fade-zoom-out {
+  from {
+    opacity: 1;
+    transform: scale(0.3);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}

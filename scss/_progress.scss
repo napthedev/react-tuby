@@ -1,0 +1,35 @@
+.tuby-progress {
+  width: 3.75em;
+  transform-origin: center;
+  animation: tuby-rotate 2s linear infinite;
+
+  circle {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 4;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: tuby-dash 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes tuby-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tuby-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}

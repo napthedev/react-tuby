@@ -1,0 +1,67 @@
+.tuby {
+  &-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #00000080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+  }
+
+  &-modal {
+    width: 95vw;
+    max-width: 300px;
+    height: auto;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: #f9f9f9;
+    color: #000;
+    padding: 20px;
+
+    h1 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 25px;
+    }
+
+    p {
+      margin: 0;
+      margin-top: 15px;
+      margin-bottom: 2px;
+      font-size: 15px;
+    }
+
+    select {
+      cursor: pointer;
+      padding: 10px;
+      margin: 0;
+      border: 1px solid #d8d8d8;
+      outline: none;
+      background: #f1f1f1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+    }
+
+    option {
+      background: #f1f1f1;
+      width: 100%;
+    }
+
+    &-btn {
+      &-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+      }
+    }
+  }
+}

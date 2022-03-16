@@ -1,0 +1,48 @@
+.tuby {
+  --control-spacing: min(3vw, 20px);
+
+  &:hover &-controls-hovered {
+    opacity: 1 !important;
+  }
+
+  &-time {
+    white-space: nowrap;
+  }
+
+  &-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: linear-gradient(to bottom, transparent, #00000091);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 2;
+
+    &-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      flex-grow: 1;
+      padding: 0 8px 6px 8px;
+    }
+
+    &-left {
+      display: flex;
+      gap: var(--control-spacing);
+      align-items: center;
+      padding: 0 var(--control-spacing);
+    }
+
+    &-right {
+      display: flex;
+      gap: var(--control-spacing);
+      align-items: center;
+      padding: 0 var(--control-spacing);
+    }
+  }
+}

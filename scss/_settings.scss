@@ -1,0 +1,109 @@
+.tuby {
+  &-settings {
+    &-dialog {
+      position: absolute;
+      bottom: 40px;
+      right: -50px;
+      width: 300px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #1c1c1ce6;
+      visibility: hidden;
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    &-outer {
+      position: relative;
+      transition: 0.3s;
+    }
+
+    &-section {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 300px;
+      max-height: 250px;
+      transition: 0.3s;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &-header {
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        gap: 15px;
+        cursor: pointer;
+        min-height: 50px;
+        border-bottom: 1px solid #565552;
+      }
+    }
+
+    &-py {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 10px 0;
+    }
+
+    &-translate {
+      &-left {
+        transform: translateX(-100%);
+      }
+      &-center {
+        transform: translateX(0);
+      }
+      &-right {
+        transform: translateX(100%);
+      }
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 15px;
+      cursor: pointer;
+      transition: 0.2s;
+      min-height: 45px;
+
+      p {
+        margin: 0;
+      }
+
+      &:hover {
+        background: #343434;
+      }
+
+      &-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+
+    &-item-2 {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 0 15px;
+      cursor: pointer;
+      transition: 0.2s;
+      min-height: 45px;
+
+      p {
+        margin: 0;
+      }
+
+      &:hover {
+        background: #343434;
+      }
+
+      &-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+  }
+}

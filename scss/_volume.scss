@@ -1,0 +1,65 @@
+.tuby {
+  &-volume {
+    &-container {
+      display: flex;
+      align-items: stretch;
+      gap: 6px;
+    }
+
+    &-slider {
+      height: 4px;
+      background: #ffffff91;
+      outline: none;
+      border-radius: 1px;
+      appearance: none;
+      width: 52px;
+      z-index: 1;
+      cursor: pointer;
+      margin: 0;
+
+      @mixin thumb {
+        width: 12px;
+        height: 12px;
+        background: #fff;
+        cursor: pointer;
+        border-radius: 99999px;
+        appearance: none;
+      }
+
+      &::-webkit-slider-thumb {
+        @include thumb;
+      }
+
+      &::-moz-range-thumb {
+        @include thumb;
+      }
+    }
+
+    &-wrapper {
+      width: 0;
+      transition: 0.3s;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    &-container:hover &-wrapper {
+      width: 52px;
+
+      @media (max-width: 640px) {
+        width: 0 !important;
+      }
+    }
+
+    &-left-bar {
+      position: absolute;
+      left: 0;
+      height: 4px;
+      background: #fff;
+      width: 52px;
+      border-radius: 1px;
+    }
+  }
+}

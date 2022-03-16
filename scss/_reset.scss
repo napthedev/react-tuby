@@ -1,0 +1,17 @@
+.tuby {
+  --tuby-primary-color: #ff0000;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+  }
+
+  * {
+    user-select: none;
+  }
+}
