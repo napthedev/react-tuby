@@ -19,7 +19,7 @@ A React video player library with YouTube-like UI
 - 📹 HTML Video, M3U8 support
 - 🎛 Allow multiple qualities
 - 📱 Fully responsive
-- 🖥 FullScreen cross browser support, event safari on iphone
+- 🖥 FullScreen cross browser support, even safari on iphone
 - 📖 Subtitles support
 - ⏰ Speed control
 - ⌨️ Keyboard shortcuts
@@ -147,7 +147,7 @@ Usage
 ```jsx
 import ReactHlsPlayer from "react-hls-player";
 
-<Player src="/your-video.mp4">
+<Player src="/your-video.m3u8">
   {(ref, props) => <ReactHlsPlayer playerRef={ref} {...props} />}
 </Player>;
 ```

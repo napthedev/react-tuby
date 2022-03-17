@@ -78,11 +78,11 @@ const Player: FC<PlayerProps> = ({
     setVolume(volume === 0 ? 100 : volume);
   };
 
-  const handleSeeking = (e: any) => {
+  const handleSeeking = (offsetX: number) => {
     if (!playerRef.current || !seekRef.current) return;
 
     const offset =
-      (e.clientX - (e.target as any).getBoundingClientRect().left) /
+      (offsetX - seekRef.current.getBoundingClientRect().left) /
       seekRef.current.offsetWidth;
 
     const newTime =
@@ -94,12 +94,12 @@ const Player: FC<PlayerProps> = ({
     setCurrentTime(newTime);
   };
 
-  const handleSeekPreview = (e: any) => {
+  const handleSeekPreview = (offsetX: number) => {
     if (!playerRef.current || !seekRef.current) return;
 
-    const left = (e.target as any).getBoundingClientRect().left;
+    const left = seekRef.current.getBoundingClientRect().left;
 
-    let offsetInPercentage = (e.clientX - left) / seekRef.current.offsetWidth;
+    let offsetInPercentage = (offsetX - left) / seekRef.current.offsetWidth;
 
     offsetInPercentage =
       Math.abs(offsetInPercentage) === Infinity || isNaN(offsetInPercentage)
@@ -127,7 +127,7 @@ const Player: FC<PlayerProps> = ({
       setPaused(prev => !prev);
     }
 
-    if (e.detail === 2) {
+    if (e.detail === 2 && !isMobile()) {
       setOnFullScreen(prev => !prev);
     }
   };
@@ -394,15 +394,26 @@ const Player: FC<PlayerProps> = ({
             ref={seekRef}
             onMouseDown={e => {
               mouseDownRef.current = true;
-              handleSeeking(e);
+              handleSeeking(e.clientX);
+            }}
+            onTouchStart={e => {
+              mouseDownRef.current = true;
+              handleSeeking(e.touches?.[0]?.pageX);
             }}
             onMouseMove={e => {
-              handleSeekPreview(e);
+              handleSeekPreview(e.clientX);
               if (mouseDownRef.current) {
-                handleSeeking(e);
+                handleSeeking(e.clientX);
+              }
+            }}
+            onTouchMove={e => {
+              handleSeekPreview(e.touches?.[0]?.pageX);
+              if (mouseDownRef.current) {
+                handleSeeking(e.touches?.[0]?.pageX);
               }
             }}
             onMouseUp={() => (mouseDownRef.current = false)}
+            onTouchEnd={() => (mouseDownRef.current = false)}
             onMouseLeave={() => {
               mouseDownRef.current = false;
               setSeekPreview(null);

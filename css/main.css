@@ -184,6 +184,7 @@
 }
 .tuby:hover .tuby-controls-hovered {
   opacity: 1 !important;
+  visibility: visible;
 }
 .tuby-time {
   white-space: nowrap;
@@ -199,6 +200,7 @@
   flex-direction: column;
   align-items: stretch;
   opacity: 0;
+  visibility: hidden;
   transition: 0.3s;
   z-index: 2;
 }

@@ -3,6 +3,7 @@
 
   &:hover &-controls-hovered {
     opacity: 1 !important;
+    visibility: visible;
   }
 
   &-time {
@@ -20,6 +21,7 @@
     flex-direction: column;
     align-items: stretch;
     opacity: 0;
+    visibility: hidden;
     transition: 0.3s;
     z-index: 2;
 
