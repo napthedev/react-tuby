@@ -266,13 +266,20 @@ const Player: FC<PlayerProps> = ({
     playerRef.current.addEventListener(
       "loadeddata",
       () => {
+        console.log("loaded data");
         if (playerRef.current) {
-          playerRef.current.currentTime = currentTime;
-          playerRef.current.play();
+          if (currentTime) {
+            playerRef.current.currentTime = currentTime;
+            playerRef.current.play();
+          }
         }
       },
       { once: true }
     );
+
+    playerRef.current.addEventListener("error", () => {
+      playerRef.current?.pause();
+    });
   }, [quality]);
 
   useEffect(() => {
