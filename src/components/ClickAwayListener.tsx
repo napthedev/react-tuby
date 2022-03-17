@@ -21,7 +21,7 @@ const ClickAwayListener: FC<ClickAwayListenerProps> = ({
     window.addEventListener("click", handler);
 
     return () => window.removeEventListener("click", handler);
-  }, []);
+  }, [onClickAway]);
 
   return <>{children(childrenRef)}</>;
 };

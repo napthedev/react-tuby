@@ -42,7 +42,7 @@ const SettingsDialog: FC<SettingsProps> = ({
       sections[activeSection].current.scrollTo &&
         sections[activeSection].current.scrollTo(0, 0);
     }
-  }, [activeSection]);
+  }, [sections, activeSection]);
 
   return (
     <div

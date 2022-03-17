@@ -10,5 +10,6 @@ export const useEffectUpdate = (cb: Function, dependencies: any[]) => {
     }
 
     cb();
-  }, dependencies);
+    // eslint-disable-next-line
+  }, [...dependencies, cb]);
 };

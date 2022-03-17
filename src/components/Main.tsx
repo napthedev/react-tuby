@@ -134,7 +134,11 @@ const Player: FC<PlayerProps> = ({
 
   useEffectUpdate(() => {
     setPauseDidUpdate(true);
-    paused ? playerRef.current?.pause() : playerRef.current?.play();
+    if (paused) {
+      playerRef.current?.pause();
+    } else {
+      playerRef.current?.play();
+    }
     (document?.activeElement as any)?.blur();
   }, [paused]);
 
@@ -175,10 +179,9 @@ const Player: FC<PlayerProps> = ({
       setPaused(true);
     };
 
-    playerRef.current?.addEventListener(
-      "webkitendfullscreen",
-      endFullScreenHandler
-    );
+    let player = playerRef.current;
+
+    player?.addEventListener("webkitendfullscreen", endFullScreenHandler);
 
     return () => {
       document.removeEventListener("fullscreenchange", changeHandler);
@@ -186,10 +189,7 @@ const Player: FC<PlayerProps> = ({
       document.removeEventListener("mozfullscreenchange", changeHandler);
       document.removeEventListener("MSFullscreenChange", changeHandler);
 
-      playerRef.current?.removeEventListener(
-        "webkitendfullscreen",
-        endFullScreenHandler
-      );
+      player?.removeEventListener("webkitendfullscreen", endFullScreenHandler);
     };
   }, []);
 
@@ -281,7 +281,7 @@ const Player: FC<PlayerProps> = ({
       window.removeEventListener("keyup", keyHandler);
       window.removeEventListener("keydown", spacePressHandler);
     };
-  }, []);
+  }, [seekDuration]);
 
   const videoProps: HTMLProps<HTMLVideoElement> & { src: string } = {
     crossOrigin: "anonymous",
@@ -347,7 +347,7 @@ const Player: FC<PlayerProps> = ({
   return (
     <>
       {poster && !pauseDidUpdate && (
-        <img src={poster} className="tuby-poster" />
+        <img src={poster} className="tuby-poster" alt="Tuby Poster" />
       )}
       <div ref={containerRef} className="tuby-container">
         {children ? (
