@@ -42,7 +42,9 @@ const SettingsDialog: FC<SettingsProps> = ({
       sections[activeSection].current.scrollTo &&
         sections[activeSection].current.scrollTo(0, 0);
     }
-  }, [sections, activeSection]);
+
+    // eslint-disable-next-line
+  }, [activeSection]);
 
   return (
     <div
