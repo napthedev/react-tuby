@@ -18,9 +18,8 @@ const TestPlayer = () => {
         },
         {
           quality: 480,
-          // url:
-          //   "https://cdn.glitch.me/cbf2cfb4-aa52-4a1f-a73c-461eef3d38e8/480.mp4?v=1647351419495",
-          url: "/abc",
+          url:
+            "https://cdn.glitch.me/cbf2cfb4-aa52-4a1f-a73c-461eef3d38e8/480.mp4?v=1647351419495",
         },
       ]}
       subtitles={[
