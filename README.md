@@ -25,6 +25,7 @@ A React video player library with YouTube-like UI
 - ⌨️ Keyboard shortcuts
 - ⚙️ Support server side rendering (nextjs)
 - 🛠 No extra dependencies
+- ✅ Auto fallback to default video if render fails on old browsers
 
 ## Installation
 
