@@ -120,6 +120,36 @@ const Player: FC<PlayerProps> = ({
     });
   };
 
+  const listenMouseMoveSeeking = () => {
+    const moveHandler = (e: MouseEvent) => {
+      handleSeekPreview(e.clientX);
+      if (mouseDownRef.current) {
+        handleSeeking(e.clientX);
+      }
+    };
+    window.addEventListener("mousemove", moveHandler);
+
+    const touchMoveHandler = (e: TouchEvent) => {
+      handleSeekPreview(e.touches?.[0]?.pageX);
+      if (mouseDownRef.current) {
+        handleSeeking(e.touches?.[0]?.pageX);
+      }
+    };
+    window.addEventListener("touchmove", touchMoveHandler);
+
+    window.addEventListener("mouseup", () => {
+      window.removeEventListener("mousemove", moveHandler);
+      mouseDownRef.current = false;
+      setSeekPreview(null);
+    });
+
+    window.addEventListener("touchend", () => {
+      window.removeEventListener("touchmove", touchMoveHandler);
+      mouseDownRef.current = false;
+      setSeekPreview(null);
+    });
+  };
+
   const handleScreenClicked = (e: any) => {
     if (settingsActive) {
       setSettingsActive(false);
@@ -395,28 +425,12 @@ const Player: FC<PlayerProps> = ({
             onMouseDown={e => {
               mouseDownRef.current = true;
               handleSeeking(e.clientX);
+              listenMouseMoveSeeking();
             }}
             onTouchStart={e => {
               mouseDownRef.current = true;
               handleSeeking(e.touches?.[0]?.pageX);
-            }}
-            onMouseMove={e => {
-              handleSeekPreview(e.clientX);
-              if (mouseDownRef.current) {
-                handleSeeking(e.clientX);
-              }
-            }}
-            onTouchMove={e => {
-              handleSeekPreview(e.touches?.[0]?.pageX);
-              if (mouseDownRef.current) {
-                handleSeeking(e.touches?.[0]?.pageX);
-              }
-            }}
-            onMouseUp={() => (mouseDownRef.current = false)}
-            onTouchEnd={() => (mouseDownRef.current = false)}
-            onMouseLeave={() => {
-              mouseDownRef.current = false;
-              setSeekPreview(null);
+              listenMouseMoveSeeking();
             }}
             className="tuby-seek"
           >
