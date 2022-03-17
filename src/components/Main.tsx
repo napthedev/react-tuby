@@ -432,6 +432,8 @@ const Player: FC<PlayerProps> = ({
               handleSeeking(e.touches?.[0]?.pageX);
               listenMouseMoveSeeking();
             }}
+            onMouseMove={e => handleSeekPreview(e.clientX)}
+            onMouseLeave={() => setSeekPreview(null)}
             className="tuby-seek"
           >
             <div className="tuby-seek-bar">
