@@ -266,7 +266,6 @@ const Player: FC<PlayerProps> = ({
     playerRef.current.addEventListener(
       "loadeddata",
       () => {
-        console.log("loaded data");
         if (playerRef.current) {
           if (currentTime) {
             playerRef.current.currentTime = currentTime;
