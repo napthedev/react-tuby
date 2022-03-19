@@ -13,6 +13,7 @@ const SettingsModal: FC<SettingsProps> = ({
   setSubtitleIndex,
   quality,
   setQuality,
+  internationalization,
 }) => {
   return (
     <div
@@ -20,17 +21,22 @@ const SettingsModal: FC<SettingsProps> = ({
       className={`tuby-backdrop ${settingsActive ? "tuby-show" : ""}`}
     >
       <div onClick={e => e.stopPropagation()} className="tuby-modal">
-        <h1>Settings</h1>
+        <h1>{internationalization?.tooltipsSettings || "Settings"}</h1>
 
         <div>
-          <p>Speed</p>
+          <p>{internationalization?.settingsPlaybackSpeed || "Speed"}</p>
           <select
             value={playbackSpeed * 4 - 1}
             onChange={e => setPlaybackSpeed((+e.target.value + 1) / 4)}
           >
             {new Array(8)
               .fill("")
-              .map((_, index) => (index === 3 ? "Normal" : (index + 1) / 4))
+              .map((_, index) =>
+                index === 3
+                  ? internationalization?.settingsPlaybackSpeedNormal ||
+                    "Normal"
+                  : (index + 1) / 4
+              )
               .map((item, index) => (
                 <option key={item} value={index}>
                   {item}
@@ -41,12 +47,14 @@ const SettingsModal: FC<SettingsProps> = ({
 
         {subtitles && (
           <div>
-            <p>Subtitles</p>
+            <p>{internationalization?.settingsSubtitles || "Subtitles"}</p>
             <select
               value={subtitleIndex}
               onChange={e => setSubtitleIndex(+e.target.value)}
             >
-              <option value={-1}>Off</option>
+              <option value={-1}>
+                {internationalization?.settingsSubtitlesOff || "Off"}
+              </option>
 
               {subtitles.map((subtitle, index) => (
                 <option
@@ -65,7 +73,7 @@ const SettingsModal: FC<SettingsProps> = ({
 
         {typeof src === "object" && (
           <div>
-            <p>Quality</p>
+            <p>{internationalization?.settingsQuality || "Quality"}</p>
             <select value={quality} onChange={e => setQuality(+e.target.value)}>
               {src.map((source, index) => (
                 <option
@@ -88,7 +96,7 @@ const SettingsModal: FC<SettingsProps> = ({
             style={{ padding: 5 }}
             onClick={() => setSettingsActive(false)}
           >
-            OK
+            {internationalization?.settingsModalOff || "OK"}
           </button>
         </div>
       </div>

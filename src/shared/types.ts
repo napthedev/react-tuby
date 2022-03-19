@@ -1,5 +1,22 @@
 import { HTMLProps, ReactElement } from "react";
 
+interface Internationalization {
+  tooltipsPlay?: string;
+  tooltipsPause?: string;
+  tooltipsMute?: string;
+  tooltipsUnmute?: string;
+  tooltipsSubtitles?: string;
+  tooltipsSettings?: string;
+  tooltipsFullscreen?: string;
+  tooltipsExitFullscreen?: string;
+  settingsPlaybackSpeed?: string;
+  settingsPlaybackSpeedNormal?: string;
+  settingsSubtitles?: string;
+  settingsSubtitlesOff?: string;
+  settingsQuality?: string;
+  settingsModalOff?: string;
+}
+
 export interface PlayerProps {
   playerKey?: string;
   src:
@@ -17,6 +34,7 @@ export interface PlayerProps {
   primaryColor?: string;
   poster?: string;
   seekDuration?: number;
+  internationalization?: Internationalization;
   children?: (
     ref: any,
     props: HTMLProps<HTMLVideoElement> & { src: string }
@@ -43,4 +61,5 @@ export interface SettingsProps {
   setSubtitleIndex: (value: number) => void;
   quality: number;
   setQuality: (value: number) => void;
+  internationalization?: Internationalization;
 }

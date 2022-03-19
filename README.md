@@ -81,15 +81,16 @@ import "react-tuby/css/main.css";
 
 ## Props
 
-| prop             | type                                                            | description                                                                                            |
-| ---------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **src**          | { quality: number \| string; url: string; }[] \| string;        | One url of video or array of qualities                                                                 |
-| **subtitles**    | { lang: string; language: string; url: string; }[]              | Array of subtitles, the first one will be default. Subtitle **must** be in .vtt format.                |
-| **dimensions**   | number \| { width: number \| string; height: number \| string } | Number: aspect ratio (height/width). Default: 56.25% (9/16) Width, height: set custom width and height |
-| **primaryColor** | string                                                          | Customize the primary color. Default: #ff0000                                                          |
-| **poster**       | string                                                          | The url of poster image                                                                                |
-| **seekDuration** | number                                                          | Seek duration when pressing left/right key. Default: 10                                                |
-| **playerKey**    | string                                                          | Unique user key to store video state in localStorage                                                   |
+| prop                     | type                                                            | description                                                                                            |
+| ------------------------ | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **src**                  | { quality: number \| string; url: string; }[] \| string;        | One url of video or array of qualities                                                                 |
+| **subtitles**            | { lang: string; language: string; url: string; }[]              | Array of subtitles, the first one will be default. Subtitle **must** be in .vtt format.                |
+| **dimensions**           | number \| { width: number \| string; height: number \| string } | Number: aspect ratio (height/width). Default: 56.25% (9/16) Width, height: set custom width and height |
+| **primaryColor**         | string                                                          | Customize the primary color. Default: #ff0000                                                          |
+| **poster**               | string                                                          | The url of poster image                                                                                |
+| **seekDuration**         | number                                                          | Seek duration when pressing left/right key. Default: 10                                                |
+| **playerKey**            | string                                                          | Unique user key to store video state in localStorage                                                   |
+| **internationalization** | string                                                          | See internationalization section below                                                                 |
 
 ## Examples
 
@@ -152,6 +153,25 @@ import ReactHlsPlayer from "react-hls-player";
   {(ref, props) => <ReactHlsPlayer playerRef={ref} {...props} />}
 </Player>;
 ```
+
+## Internationalization
+
+| property                    | default              |
+| --------------------------- | -------------------- |
+| tooltipsPlay                | Play (k)             |
+| tooltipsPause               | Pause (k)            |
+| tooltipsMute                | Mute (m)             |
+| tooltipsUnmute              | Unmute (m)           |
+| tooltipsSubtitles           | Subtitles (c)        |
+| tooltipsSettings            | Settings             |
+| tooltipsFullscreen          | Full Screen (f)      |
+| tooltipsExitFullscreen      | Exit full screen (f) |
+| settingsPlaybackSpeed       | Playback Speed       |
+| settingsPlaybackSpeedNormal | Normal               |
+| settingsSubtitles           | Subtitles            |
+| settingsSubtitlesOff        | Off                  |
+| settingsQuality             | Quality              |
+| settingsModalOff            | OK                   |
 
 ## Issues
 

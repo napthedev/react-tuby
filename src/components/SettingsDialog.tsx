@@ -18,6 +18,7 @@ const SettingsDialog: FC<SettingsProps> = ({
   setSubtitleIndex,
   quality,
   setQuality,
+  internationalization,
 }) => {
   const [height, setHeight] = useState(0);
 
@@ -65,7 +66,10 @@ const SettingsDialog: FC<SettingsProps> = ({
           >
             <div className="tuby-settings-item-left">
               <Speed className="tuby-icon-sm" />
-              <p>Playback Speed</p>
+              <p>
+                {internationalization?.settingsPlaybackSpeed ||
+                  "Playback Speed"}
+              </p>
             </div>
             <ChevronRight className="tuby-chevron" />
           </div>
@@ -76,7 +80,7 @@ const SettingsDialog: FC<SettingsProps> = ({
             >
               <div className="tuby-settings-item-left">
                 <SelectSubtitle className="tuby-icon-sm" />
-                <p>Subtitles</p>
+                <p>{internationalization?.settingsSubtitles || "Subtitles"}</p>
               </div>
               <ChevronRight style={{ width: 15, height: 15 }} />
             </div>
@@ -88,7 +92,7 @@ const SettingsDialog: FC<SettingsProps> = ({
             >
               <div className="tuby-settings-item-left">
                 <Quality className="tuby-icon-sm" />
-                <p>Quality</p>
+                <p>{internationalization?.settingsQuality || "Quality"}</p>
               </div>
               <ChevronRight className="tuby-chevron" />
             </div>
@@ -108,12 +112,19 @@ const SettingsDialog: FC<SettingsProps> = ({
             className="tuby-settings-section-header"
           >
             <ChevronLeft className="tuby-chevron" />
-            <span>Playback speed</span>
+            <span>
+              {internationalization?.settingsPlaybackSpeed || "Playback speed"}
+            </span>
           </div>
           <div className="tuby-settings-py">
             {new Array(8)
               .fill("")
-              .map((_, index) => (index === 3 ? "Normal" : (index + 1) / 4))
+              .map((_, index) =>
+                index === 3
+                  ? internationalization?.settingsPlaybackSpeedNormal ||
+                    "Normal"
+                  : (index + 1) / 4
+              )
               .map((item, index) => (
                 <div
                   key={item}
@@ -148,7 +159,9 @@ const SettingsDialog: FC<SettingsProps> = ({
               className="tuby-settings-section-header"
             >
               <ChevronLeft className="tuby-chevron" />
-              <span>Subtitles</span>
+              <span>
+                {internationalization?.settingsSubtitles || "Subtitles"}
+              </span>
             </div>
             <div className="tuby-settings-py">
               <div
@@ -163,7 +176,9 @@ const SettingsDialog: FC<SettingsProps> = ({
                 ) : (
                   <div style={{ width: 15, height: 15 }}></div>
                 )}
-                <span>Off</span>
+                <span>
+                  {internationalization?.settingsSubtitlesOff || "Off"}
+                </span>
               </div>
               {subtitles.map((subtitle, index) => (
                 <div
@@ -200,7 +215,7 @@ const SettingsDialog: FC<SettingsProps> = ({
               className="tuby-settings-section-header"
             >
               <ChevronLeft className="tuby-chevron" />
-              <span>Quality</span>
+              <span>{internationalization?.settingsQuality || "Quality"}</span>
             </div>
             <div className="tuby-settings-py">
               {src.map((source, index) => (

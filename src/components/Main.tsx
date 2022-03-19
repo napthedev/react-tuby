@@ -26,6 +26,7 @@ const Player: FC<PlayerProps> = ({
   children,
   poster,
   seekDuration = 10,
+  internationalization,
 }) => {
   const [quality, setQuality] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(
@@ -486,7 +487,11 @@ const Player: FC<PlayerProps> = ({
               <button
                 ref={pauseButton}
                 className="tuby-center-container tuby-tooltips-left"
-                data-tuby-tooltips={paused ? "Play (k)" : "Pause (k)"}
+                data-tuby-tooltips={
+                  paused
+                    ? internationalization?.tooltipsPlay || "Play (k)"
+                    : internationalization?.tooltipsPause || "Pause (k)"
+                }
                 onClickCapture={() => setPaused(prev => !prev)}
               >
                 {paused ? (
@@ -501,7 +506,9 @@ const Player: FC<PlayerProps> = ({
                   ref={volumeButtonRef}
                   className="tuby-center-container"
                   data-tuby-tooltips={
-                    isMuted || volume === 0 ? "Unmute (m)" : "Mute (m)"
+                    isMuted || volume === 0
+                      ? internationalization?.tooltipsUnmute || "Unmute (m)"
+                      : internationalization?.tooltipsMute || "Mute (m)"
                   }
                   onClickCapture={toggleSound}
                 >
@@ -545,7 +552,9 @@ const Player: FC<PlayerProps> = ({
                   className={`tuby-center-container ${
                     subtitleIndex >= 0 ? "tuby-icon-underline" : ""
                   }`}
-                  data-tuby-tooltips="Subtitles (c)"
+                  data-tuby-tooltips={
+                    internationalization?.tooltipsSubtitles || `Subtitles (c)`
+                  }
                   onClickCapture={() =>
                     subtitleIndex >= 0
                       ? setSubtitleIndex(-1)
@@ -562,7 +571,11 @@ const Player: FC<PlayerProps> = ({
                       className="tuby-center-container"
                       onClickCapture={() => setSettingsActive(prev => !prev)}
                       {...(!settingsActive
-                        ? { "data-tuby-tooltips": "Settings" }
+                        ? {
+                            "data-tuby-tooltips":
+                              internationalization?.tooltipsSettings ||
+                              "Settings",
+                          }
                         : {})}
                     >
                       <Cog className="tuby-icon-sm" />
@@ -580,6 +593,7 @@ const Player: FC<PlayerProps> = ({
                         setSubtitleIndex={setSubtitleIndex}
                         quality={quality}
                         setQuality={setQuality}
+                        internationalization={internationalization}
                       />
                     ) : (
                       <SettingsModal
@@ -593,6 +607,7 @@ const Player: FC<PlayerProps> = ({
                         setSubtitleIndex={setSubtitleIndex}
                         quality={quality}
                         setQuality={setQuality}
+                        internationalization={internationalization}
                       />
                     )}
                   </div>
@@ -603,7 +618,11 @@ const Player: FC<PlayerProps> = ({
                 className="tuby-center-container tuby-tooltips-right"
                 ref={fullscreenToggleButton}
                 data-tuby-tooltips={`${
-                  onFullScreen ? "Exit full screen (f)" : "Fullscreen (f)"
+                  onFullScreen
+                    ? internationalization?.tooltipsExitFullscreen ||
+                      "Exit full screen (f)"
+                    : internationalization?.tooltipsFullscreen ||
+                      "Full screen (f)"
                 }`}
                 onClickCapture={() => setOnFullScreen(prev => !prev)}
               >

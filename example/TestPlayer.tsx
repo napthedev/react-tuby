@@ -37,7 +37,6 @@ const TestPlayer = () => {
         },
       ]}
       poster="https://cdn.jsdelivr.net/gh/naptestdev/video-examples@master/poster.png"
-      // primaryColor="#0D6EFD"
     />
   );
 };
