@@ -36,16 +36,18 @@ class ErrorBoundary extends Component<
           : this.props.src[0].url,
       children: (
         <>
-          {this.props.subtitles?.map((subtitle, index) => (
-            <track
-              key={subtitle.lang}
-              kind="subtitles"
-              srcLang={subtitle.lang}
-              label={subtitle.language}
-              src={subtitle.url}
-              default={index === 0}
-            />
-          ))}
+          {this.props.subtitles &&
+            this.props.subtitles.length > 0 &&
+            this.props.subtitles.map((subtitle, index) => (
+              <track
+                key={subtitle.lang}
+                kind="subtitles"
+                srcLang={subtitle.lang}
+                label={subtitle.language}
+                src={subtitle.url}
+                default={index === 0}
+              />
+            ))}
         </>
       ),
     };

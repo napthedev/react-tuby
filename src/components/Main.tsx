@@ -368,15 +368,18 @@ const Player: FC<PlayerProps> = ({
 
     children: (
       <>
-        {subtitles && subtitleIndex >= 0 && loadedData && (
-          <track
-            kind="subtitles"
-            srcLang={subtitles[subtitleIndex].lang}
-            label={subtitles[subtitleIndex].language}
-            src={subtitles[subtitleIndex].url}
-            default
-          />
-        )}
+        {subtitles &&
+          subtitles.length > 0 &&
+          subtitleIndex >= 0 &&
+          loadedData && (
+            <track
+              kind="subtitles"
+              srcLang={subtitles[subtitleIndex].lang}
+              label={subtitles[subtitleIndex].language}
+              src={subtitles[subtitleIndex].url}
+              default
+            />
+          )}
       </>
     ),
   };
