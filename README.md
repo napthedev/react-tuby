@@ -91,6 +91,7 @@ import "react-tuby/css/main.css";
 | **seekDuration**         | number                                                          | Seek duration when pressing left/right key. Default: 10                                                |
 | **playerKey**            | string                                                          | Unique user key to store video state in localStorage                                                   |
 | **internationalization** | string                                                          | See internationalization section below                                                                 |
+| **playerRef**            | RefObject\<HTMLVideoElement\>                                   | Use your own ref to control the video player                                                           |
 
 ## Examples
 
@@ -152,6 +153,20 @@ import ReactHlsPlayer from "react-hls-player";
 <Player src="/your-video.m3u8">
   {(ref, props) => <ReactHlsPlayer playerRef={ref} {...props} />}
 </Player>;
+```
+
+### Get video currentTime using custom ref
+
+```jsx
+const ref = useRef(null);
+
+useEffect(() => {
+  ref.current?.addEventListener("timeupdate", () => {
+    console.log(ref.current?.currentTime);
+  });
+}, []);
+
+<Player playerRef={ref} src="/your-video.mp4" />;
 ```
 
 ## Internationalization

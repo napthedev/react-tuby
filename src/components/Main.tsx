@@ -27,6 +27,7 @@ const Player: FC<PlayerProps> = ({
   poster,
   seekDuration = 10,
   internationalization,
+  playerRef: passedDownRef,
 }) => {
   const [quality, setQuality] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(
@@ -61,7 +62,8 @@ const Player: FC<PlayerProps> = ({
 
   const [pauseDidUpdate, setPauseDidUpdate] = useState(false);
 
-  const playerRef = useRef<HTMLVideoElement>(null);
+  const myRef = useRef<HTMLVideoElement>(null);
+  const playerRef = passedDownRef || myRef;
   const containerRef = useRef<HTMLDivElement>(null);
   const seekRef = useRef<HTMLDivElement>(null);
   const mouseDownRef = useRef<Boolean>(false);

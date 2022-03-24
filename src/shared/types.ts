@@ -1,4 +1,4 @@
-import { HTMLProps, ReactElement } from "react";
+import { HTMLProps, ReactElement, RefObject } from "react";
 
 interface Internationalization {
   tooltipsPlay?: string;
@@ -35,6 +35,7 @@ export interface PlayerProps {
   poster?: string;
   seekDuration?: number;
   internationalization?: Internationalization;
+  playerRef?: RefObject<HTMLVideoElement>;
   children?: (
     ref: any,
     props: HTMLProps<HTMLVideoElement> & { src: string }
