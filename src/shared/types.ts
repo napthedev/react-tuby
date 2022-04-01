@@ -35,6 +35,7 @@ export interface PlayerProps {
   poster?: string;
   seekDuration?: number;
   internationalization?: Internationalization;
+  pictureInPicture?: boolean;
   playerRef?: RefObject<HTMLVideoElement>;
   children?: (
     ref: any,

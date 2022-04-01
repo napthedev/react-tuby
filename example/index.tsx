@@ -4,7 +4,6 @@ import "../css/main.css";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { Player } from "../src";
 import TestPlayer from "./TestPlayer";
 
 const App = () => {

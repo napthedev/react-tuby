@@ -92,6 +92,7 @@ import "react-tuby/css/main.css";
 | **playerKey**            | string                                                          | Unique user key to store video state in localStorage                                                   |
 | **internationalization** | string                                                          | See internationalization section below                                                                 |
 | **playerRef**            | RefObject\<HTMLVideoElement\>                                   | Use your own ref to control the video player                                                           |
+| **pictureInPicture**     | boolean                                                         | Show picture in picture button                                                                         |
 
 ## Examples
 

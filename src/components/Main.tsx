@@ -8,6 +8,7 @@ import ExitFullScreen from "./Icons/ExitFullScreen";
 import FullScreen from "./Icons/FullScreen";
 import Pause from "./Icons/Pause";
 import PauseEffect from "./Effect/PauseEffect";
+import PictureInPicture from "./Icons/PictureInPicture";
 import Play from "./Icons/Play";
 import PlayEffect from "./Effect/PlayEffect";
 import { PlayerProps } from "../shared/types";
@@ -28,6 +29,7 @@ const Player: FC<PlayerProps> = ({
   seekDuration = 10,
   internationalization,
   playerRef: passedDownRef,
+  pictureInPicture = false,
 }) => {
   const [quality, setQuality] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(
@@ -618,6 +620,21 @@ const Player: FC<PlayerProps> = ({
                   </div>
                 )}
               </ClickAwayListener>
+
+              {pictureInPicture && (document as any)?.pictureInPictureEnabled && (
+                <button
+                  className="tuby-center-container"
+                  ref={fullscreenToggleButton}
+                  data-tuby-tooltips="Picture in Picture"
+                  onClickCapture={() => {
+                    let doc = document as any;
+                    if (doc.pictureInPictureElement) doc.exitPictureInPicture();
+                    else (playerRef.current as any)?.requestPictureInPicture();
+                  }}
+                >
+                  <PictureInPicture className="tuby-icon-sm" />
+                </button>
+              )}
 
               <button
                 className="tuby-center-container tuby-tooltips-right"
