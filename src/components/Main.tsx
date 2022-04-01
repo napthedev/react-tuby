@@ -229,40 +229,42 @@ const Player: FC<PlayerProps> = ({
   }, []);
 
   useEffectUpdate(() => {
-    if (onFullScreen) {
-      if (isMobile()) {
-        let elem = playerRef.current as any;
-        const requestFullScreen =
-          elem.requestFullscreen ||
-          elem.webkitRequestFullscreen ||
-          elem.webkitRequestFullScreen ||
-          elem.webkitEnterFullscreen ||
-          elem.mozRequestFullScreen ||
-          elem.msRequestFullscreen;
-        requestFullScreen?.call(elem);
+    try {
+      if (onFullScreen) {
+        if (isMobile()) {
+          let elem = playerRef.current as any;
+          const requestFullScreen =
+            elem.requestFullscreen ||
+            elem.webkitRequestFullscreen ||
+            elem.webkitRequestFullScreen ||
+            elem.webkitEnterFullscreen ||
+            elem.mozRequestFullScreen ||
+            elem.msRequestFullscreen;
+          requestFullScreen?.call(elem);
+        } else {
+          let elem = containerRef.current as any;
+          const requestFullScreen =
+            elem.requestFullscreen ||
+            elem.webkitRequestFullscreen ||
+            elem.webkitRequestFullScreen ||
+            elem.webkitEnterFullscreen ||
+            elem.mozRequestFullScreen ||
+            elem.msRequestFullscreen;
+          requestFullScreen?.call(elem);
+        }
       } else {
-        let elem = containerRef.current as any;
-        const requestFullScreen =
-          elem.requestFullscreen ||
-          elem.webkitRequestFullscreen ||
-          elem.webkitRequestFullScreen ||
-          elem.webkitEnterFullscreen ||
-          elem.mozRequestFullScreen ||
-          elem.msRequestFullscreen;
-        requestFullScreen?.call(elem);
+        let doc = document as any;
+
+        const exitFullScreen =
+          doc.exitFullscreen ||
+          doc.webkitExitFullscreen ||
+          doc.webkitCancelFullScreen ||
+          doc.mozCancelFullScreen ||
+          doc.msExitFullscreen;
+
+        exitFullScreen?.call(document);
       }
-    } else {
-      let doc = document as any;
-
-      const exitFullScreen =
-        doc.exitFullscreen ||
-        doc.webkitExitFullscreen ||
-        doc.webkitCancelFullScreen ||
-        doc.mozCancelFullScreen ||
-        doc.msExitFullscreen;
-
-      exitFullScreen?.call(document);
-    }
+    } catch (error) {}
   }, [onFullScreen]);
 
   useEffectUpdate(() => {
@@ -627,9 +629,13 @@ const Player: FC<PlayerProps> = ({
                   ref={fullscreenToggleButton}
                   data-tuby-tooltips="Picture in Picture"
                   onClickCapture={() => {
-                    let doc = document as any;
-                    if (doc.pictureInPictureElement) doc.exitPictureInPicture();
-                    else (playerRef.current as any)?.requestPictureInPicture();
+                    try {
+                      let doc = document as any;
+                      if (doc?.pictureInPictureElement)
+                        doc?.exitPictureInPicture();
+                      else
+                        (playerRef.current as any)?.requestPictureInPicture();
+                    } catch (error) {}
                   }}
                 >
                   <PictureInPicture className="tuby-icon-sm" />
