@@ -1,9 +1,15 @@
 .tuby {
   --control-spacing: min(3vw, 20px);
+  cursor: none;
 
-  &:hover &-controls-hovered {
+  &-controls-hovered:hover &-controls {
     opacity: 1 !important;
-    visibility: visible;
+    visibility: visible !important;
+    cursor: default;
+  }
+
+  &-controls-hovered:hover {
+    cursor: pointer;
   }
 
   &-time {
@@ -24,6 +30,7 @@
     visibility: hidden;
     transition: 0.3s;
     z-index: 2;
+    cursor: none;
 
     &-main {
       display: flex;

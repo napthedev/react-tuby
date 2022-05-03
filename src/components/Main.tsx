@@ -78,6 +78,16 @@ const Player: FC<PlayerProps> = ({
     playerRef.current && (playerRef.current.currentTime += amount);
   };
 
+  const updateHoverState = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    setHoverEnabled(true);
+
+    timeoutRef.current = setTimeout(() => {
+      setHoverEnabled(false);
+    }, 2000);
+  };
+
   const toggleSound = () => {
     setIsMuted(!isMuted);
     setVolume(volume === 0 ? 100 : volume);
@@ -168,6 +178,7 @@ const Player: FC<PlayerProps> = ({
   };
 
   useEffectUpdate(() => {
+    updateHoverState();
     setPauseDidUpdate(true);
     if (paused) {
       playerRef.current?.pause();
@@ -265,6 +276,7 @@ const Player: FC<PlayerProps> = ({
         exitFullScreen?.call(document);
       }
     } catch (error) {}
+    updateHoverState();
   }, [onFullScreen]);
 
   useEffectUpdate(() => {
@@ -362,15 +374,7 @@ const Player: FC<PlayerProps> = ({
     onEnded: () => {
       setPaused(true);
     },
-    onMouseMove: () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
-      setHoverEnabled(true);
-
-      timeoutRef.current = setTimeout(() => {
-        setHoverEnabled(false);
-      }, 2000);
-    },
+    onMouseMove: () => updateHoverState(),
 
     children: (
       <>
@@ -395,7 +399,12 @@ const Player: FC<PlayerProps> = ({
       {poster && !pauseDidUpdate && (
         <img src={poster} className="tuby-poster" alt="Tuby Poster" />
       )}
-      <div ref={containerRef} className="tuby-container">
+      <div
+        ref={containerRef}
+        className={`tuby-container ${
+          hoverEnabled ? "tuby-controls-hovered" : ""
+        }`}
+      >
         {children ? (
           children(playerRef, videoProps)
         ) : (
@@ -434,7 +443,7 @@ const Player: FC<PlayerProps> = ({
           }
           className={`tuby-controls ${
             paused || settingsActive ? "tuby-show" : ""
-          } ${hoverEnabled ? "tuby-controls-hovered" : ""}`}
+          }`}
         >
           <div
             ref={seekRef}
