@@ -30,6 +30,7 @@ const Player: FC<PlayerProps> = ({
   internationalization,
   playerRef: passedDownRef,
   pictureInPicture = false,
+  keyboardShortcut = true,
 }) => {
   const [quality, setQuality] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(
@@ -73,6 +74,7 @@ const Player: FC<PlayerProps> = ({
   const fullscreenToggleButton = useRef<HTMLButtonElement>(null);
   const pauseButton = useRef<HTMLButtonElement>(null);
   const volumeButtonRef = useRef<HTMLButtonElement>(null);
+  const subtitleButtonRef = useRef<HTMLButtonElement>(null);
 
   const seekTime = (amount: number) => {
     playerRef.current && (playerRef.current.currentTime += amount);
@@ -310,22 +312,47 @@ const Player: FC<PlayerProps> = ({
 
   useEffect(() => {
     const keyHandler = (e: KeyboardEvent) => {
+      if (!keyboardShortcut) return;
+
       if (containerRef.current?.contains(document.activeElement))
         (document.activeElement as any)?.blur();
       // Pause
-      if (e.key === " " || e.key === "k") pauseButton.current?.click();
+      if (
+        (keyboardShortcut === true || keyboardShortcut.pause) &&
+        (e.key === " " || e.key === "k")
+      )
+        pauseButton.current?.click();
       // Rewind
-      if (e.key === "ArrowLeft") seekTime(-seekDuration);
+      if (
+        (keyboardShortcut === true || keyboardShortcut.rewind) &&
+        e.key === "ArrowLeft"
+      )
+        seekTime(-seekDuration);
       // Forward
-      if (e.key === "ArrowRight") seekTime(seekDuration);
+      if (
+        (keyboardShortcut === true || keyboardShortcut.forward) &&
+        e.key === "ArrowRight"
+      )
+        seekTime(seekDuration);
       // Full screen
-      if (e.key === "f") fullscreenToggleButton.current?.click();
+      if (
+        (keyboardShortcut === true || keyboardShortcut.fullScreen) &&
+        e.key === "f"
+      )
+        fullscreenToggleButton.current?.click();
       // Mute
-      if (e.key === "m") volumeButtonRef.current?.click();
+      if ((keyboardShortcut === true || keyboardShortcut.mute) && e.key === "m")
+        volumeButtonRef.current?.click();
+      // Subtitle
+      if (
+        (keyboardShortcut === true || keyboardShortcut.subtitle) &&
+        e.key === "c"
+      )
+        subtitleButtonRef.current?.click();
     };
 
     const spacePressHandler = (e: KeyboardEvent) => {
-      if (e.key === " ") e.preventDefault();
+      if (keyboardShortcut && e.key === " ") e.preventDefault();
     };
 
     window.addEventListener("keyup", keyHandler);
@@ -336,7 +363,7 @@ const Player: FC<PlayerProps> = ({
       window.removeEventListener("keyup", keyHandler);
       window.removeEventListener("keydown", spacePressHandler);
     };
-  }, [seekDuration]);
+  }, [seekDuration, keyboardShortcut]);
 
   const videoProps: HTMLProps<HTMLVideoElement> & { src: string } = {
     crossOrigin: "anonymous",
@@ -567,6 +594,7 @@ const Player: FC<PlayerProps> = ({
             <div className="tuby-controls-right">
               {Boolean(subtitles) && (
                 <button
+                  ref={subtitleButtonRef}
                   className={`tuby-center-container ${
                     subtitleIndex >= 0 ? "tuby-icon-underline" : ""
                   }`}

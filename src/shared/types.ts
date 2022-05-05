@@ -36,6 +36,16 @@ export interface PlayerProps {
   seekDuration?: number;
   internationalization?: Internationalization;
   pictureInPicture?: boolean;
+  keyboardShortcut?:
+    | boolean
+    | {
+        pause?: boolean;
+        rewind?: boolean;
+        forward?: boolean;
+        fullScreen?: boolean;
+        mute?: boolean;
+        subtitle?: boolean;
+      };
   playerRef?: RefObject<HTMLVideoElement>;
   children?: (
     ref: any,
