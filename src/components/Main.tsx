@@ -253,7 +253,7 @@ const Player: FC<PlayerProps> = ({
             elem.webkitEnterFullscreen ||
             elem.mozRequestFullScreen ||
             elem.msRequestFullscreen;
-          requestFullScreen?.call(elem);
+          requestFullScreen?.call(elem).catch((err: any) => console.log(err));
         } else {
           let elem = containerRef.current as any;
           const requestFullScreen =
@@ -263,7 +263,7 @@ const Player: FC<PlayerProps> = ({
             elem.webkitEnterFullscreen ||
             elem.mozRequestFullScreen ||
             elem.msRequestFullscreen;
-          requestFullScreen?.call(elem);
+          requestFullScreen?.call(elem).catch((err: any) => console.log(err));
         }
       } else {
         let doc = document as any;
@@ -275,7 +275,7 @@ const Player: FC<PlayerProps> = ({
           doc.mozCancelFullScreen ||
           doc.msExitFullscreen;
 
-        exitFullScreen?.call(document);
+        exitFullScreen?.call(document).catch((err: any) => console.log(err));
       }
     } catch (error) {}
     updateHoverState();
