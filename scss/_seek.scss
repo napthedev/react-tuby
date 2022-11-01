@@ -52,6 +52,24 @@
             transition: 0.15s;
           }
         }
+        &-left2 {
+          height: 100%;
+          background: var(--tuby-primary-color);
+          position: relative;
+    
+          &:after {
+            content: "";
+            position: absolute;
+            height: 12px;
+            width: 12px;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%) scale(1);
+            border-radius: 99999px;
+            background: var(--tuby-primary-color);
+            transition: 0.15s;
+          }
+        }
         &:hover {
           height: 9px !important;
         }

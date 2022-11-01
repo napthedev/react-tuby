@@ -30,7 +30,7 @@ const SeekBar: FC<SeekBarProps> = ({
                                                     ? `${Math.round(((currentTime - data.startTime) / (data.endTime - data.startTime)) * 1000) / 10}%`
                                                     : 0,
                                     }}
-                                    className={currentTime> data.startTime&&currentTime< data.endTime&&seekPreviewTime>-1?"tuby-seek-wrapper-bar-left1":"tuby-seek-wrapper-bar-left"}
+                                    className={currentTime> data.startTime&&currentTime< data.endTime&&seekPreviewTime>-1?(seekPreviewTime> data.startTime&&seekPreviewTime< data.endTime?"tuby-seek-wrapper-bar-left1":"tuby-seek-wrapper-bar-left2"):"tuby-seek-wrapper-bar-left"}
                                 ></div>
 
 
@@ -52,7 +52,7 @@ const SeekBar: FC<SeekBarProps> = ({
                                         ? `${Math.round((currentTime / duration) * 1000) / 10}%`
                                         : 0,
                             }}
-                            className={seekPreviewTime>-1?"tuby-seek-wrapper-bar-left1":"tuby-seek-wrapper-bar-left"}
+                            className={seekPreviewTime>-1?"tuby-seek-wrapper-bar-left2":"tuby-seek-wrapper-bar-left"}
                         ></div>
 
 
