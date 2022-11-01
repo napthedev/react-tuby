@@ -42,7 +42,7 @@ const SeekBar: FC<SeekBarProps> = ({
 
             :
             (<div className="tuby-seek-wrapper">
-                <div className="tuby-seek-wrapper-bar">
+                <div className="tuby-seek-wrapper-bar" style={{width:'100%'}}>
                     {
 
                         <div
@@ -52,7 +52,7 @@ const SeekBar: FC<SeekBarProps> = ({
                                         ? `${Math.round((currentTime / duration) * 1000) / 10}%`
                                         : 0,
                             }}
-                            className="tuby-seek-wrapper-bar-left"
+                            className={seekPreviewTime>-1?"tuby-seek-wrapper-bar-left1":"tuby-seek-wrapper-bar-left"}
                         ></div>
 
 
