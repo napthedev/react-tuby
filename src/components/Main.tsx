@@ -19,6 +19,7 @@ import VolumeFull from "./Icons/VolumeFull";
 import VolumeHalf from "./Icons/VolumeHalf";
 import VolumeMuted from "./Icons/VolumeMuted";
 import { useEffectUpdate } from "../hooks/useEffectUpdate";
+import SeekBar from "./SeekBar";
 
 const Player: FC<PlayerProps> = ({
   playerKey,
@@ -31,6 +32,7 @@ const Player: FC<PlayerProps> = ({
   playerRef: passedDownRef,
   pictureInPicture = false,
   keyboardShortcut = true,
+  chapters,
 }) => {
   const [quality, setQuality] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(
@@ -488,17 +490,8 @@ const Player: FC<PlayerProps> = ({
             onMouseLeave={() => setSeekPreview(null)}
             className="tuby-seek"
           >
-            <div className="tuby-seek-bar">
-              <div
-                style={{
-                  width:
-                    duration !== 0
-                      ? `${Math.round((currentTime / duration) * 1000) / 10}%`
-                      : 0,
-                }}
-                className="tuby-seek-left"
-              ></div>
-            </div>
+            
+            <SeekBar seekPreviewTime={seekPreview?.time||-1} chapters={chapters} duration={duration} currentTime={currentTime}></SeekBar>
             {seekPreview !== null && (
               <div
                 className="tuby-seek-preview"

@@ -47,6 +47,11 @@ export interface PlayerProps {
         subtitle?: boolean;
       };
   playerRef?: RefObject<HTMLVideoElement>;
+  chapters?: {
+    startTime:number;
+    endTime:number;
+    name:string;
+  }[];
   children?: (
     ref: any,
     props: HTMLProps<HTMLVideoElement> & { src: string }
@@ -74,4 +79,15 @@ export interface SettingsProps {
   quality: number;
   setQuality: (value: number) => void;
   internationalization?: Internationalization;
+}
+
+export interface SeekBarProps {
+  duration: number;
+  currentTime: number;
+  seekPreviewTime: number;
+  chapters?: {
+    startTime:number;
+    endTime:number;
+    name:string;
+  }[];
 }

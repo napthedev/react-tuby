@@ -1,46 +1,64 @@
 .tuby {
   &-seek {
-    flex-shrink: 0;
-    height: 12px;
+    height: 13px;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    margin: 0 12px;
-    position: relative;
-
-    &:hover &-bar {
-      height: 5px;
-    }
-
-    &-bar {
-      height: 3px;
-      background: #ffffff80;
-      transition: 0.15s;
-    }
-
-    &-left {
-      height: 100%;
-      background: var(--tuby-primary-color);
-      position: relative;
-
-      &:after {
-        content: "";
-        position: absolute;
-        height: 12px;
-        width: 12px;
-        right: -6px;
-        top: 50%;
-        transform: translateY(-50%) scale(0);
-        border-radius: 99999px;
-        background: var(--tuby-primary-color);
+    
+    &-wrapper {
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover &-bar {
+        height: 5px;
+      }
+  
+      &-bar {
+        height: 3px;
+        background: #ffffff80;
         transition: 0.15s;
+        &-left {
+          height: 100%;
+          background: var(--tuby-primary-color);
+          position: relative;
+    
+          &:after {
+            content: "";
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            right: -7px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            border-radius: 99999px;
+            background: var(--tuby-primary-color);
+            transition: 0.15s;
+          }
+        }
+        &-left1 {
+          height: 100%;
+          background: var(--tuby-primary-color);
+          position: relative;
+    
+          &:after {
+            content: "";
+            position: absolute;
+            height: 16px;
+            width: 16px;
+            right: -7px;
+            top: 50%;
+            transform: translateY(-50%) scale(1);
+            border-radius: 99999px;
+            background: var(--tuby-primary-color);
+            transition: 0.15s;
+          }
+        }
+        &:hover {
+          height: 9px !important;
+        }
       }
     }
-    &:hover &-left::after {
-      transform: translateY(-50%) scale(1);
-    }
+    
+    
 
     &-preview {
       position: absolute;

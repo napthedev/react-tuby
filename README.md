@@ -76,6 +76,7 @@ import "react-tuby/css/main.css";
     },
   ]}
   poster="https://cdn.jsdelivr.net/gh/naptestdev/video-examples@master/poster.png"
+  chapters={[{startTime:0,endTime:30,name:'chapter1'},{startTime:30,endTime:183,name:'chapter2'}]}
 />
 ```
 
@@ -94,6 +95,7 @@ import "react-tuby/css/main.css";
 | **playerRef**            | RefObject\<HTMLVideoElement\>                                                                                                  | Use your own ref to control the video player                                                           |
 | **pictureInPicture**     | boolean                                                                                                                        | Show picture in picture button                                                                         |
 | **keyboardShortcut**     | boolean \| { pause?: boolean; rewind?: boolean; forward?: boolean; fullScreen?: boolean; mute?: boolean; subtitle?: boolean; } | Customize keyboard shortcuts                                                                           |
+| **chapters**     | { startTime:number;endTime:number;name:string; }[]                                                                                                                      | Array of chapters
 
 ## Examples
 
