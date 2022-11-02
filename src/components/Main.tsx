@@ -1,5 +1,5 @@
 import React, { FC, HTMLProps, useEffect, useRef, useState } from "react";
-import { formatVideoTime, isMobile } from "../shared/utils";
+import { formatVideoTime, isMobile, getChapterName } from "../shared/utils";
 
 import CircularProgress from "./Icons/CircularProgress";
 import ClickAwayListener from "./ClickAwayListener";
@@ -19,6 +19,7 @@ import VolumeFull from "./Icons/VolumeFull";
 import VolumeHalf from "./Icons/VolumeHalf";
 import VolumeMuted from "./Icons/VolumeMuted";
 import { useEffectUpdate } from "../hooks/useEffectUpdate";
+import SeekBar from "./SeekBar";
 
 const Player: FC<PlayerProps> = ({
   playerKey,
@@ -31,6 +32,8 @@ const Player: FC<PlayerProps> = ({
   playerRef: passedDownRef,
   pictureInPicture = false,
   keyboardShortcut = true,
+  chapters,
+  thumbnail,
 }) => {
   const [quality, setQuality] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(
@@ -48,6 +51,7 @@ const Player: FC<PlayerProps> = ({
   const [seekPreview, setSeekPreview] = useState<null | {
     time: number;
     offset: number;
+    thumbnailIndex: number;
   }>(null);
 
   const [loadedData, setLoadedData] = useState(false);
@@ -64,6 +68,8 @@ const Player: FC<PlayerProps> = ({
   const [hoverEnabled, setHoverEnabled] = useState(true);
 
   const [pauseDidUpdate, setPauseDidUpdate] = useState(false);
+
+  const seekPreviewWidth = thumbnail?80:16;
 
   const myRef = useRef<HTMLVideoElement>(null);
   const playerRef = passedDownRef || myRef;
@@ -130,10 +136,11 @@ const Player: FC<PlayerProps> = ({
     if (isNaN(newTime)) setSeekPreview(null);
 
     if (newTime < 0) newTime = 0;
-
+    let time = Math.round(newTime);
     setSeekPreview({
-      time: Math.round(newTime),
+      time: time,
       offset: offsetInPixel,
+      thumbnailIndex:thumbnail?.frames?Math.round(time/duration*thumbnail?.frames):-1
     });
   };
 
@@ -488,42 +495,34 @@ const Player: FC<PlayerProps> = ({
             onMouseLeave={() => setSeekPreview(null)}
             className="tuby-seek"
           >
-            <div className="tuby-seek-bar">
-              <div
-                style={{
-                  width:
-                    duration !== 0
-                      ? `${Math.round((currentTime / duration) * 1000) / 10}%`
-                      : 0,
-                }}
-                className="tuby-seek-left"
-              ></div>
-            </div>
+            
+            <SeekBar seekPreviewTime={seekPreview?.time||-1} chapters={chapters} duration={duration} currentTime={currentTime}></SeekBar>
             {seekPreview !== null && (
               <div
                 className="tuby-seek-preview"
                 style={{
                   left:
-                    seekPreview.offset < 16
+                    seekPreview.offset < seekPreviewWidth
                       ? 0
                       : seekPreview.offset >
-                        (seekRef.current?.offsetWidth || 0) - 16
+                        (seekRef.current?.offsetWidth || 0) - seekPreviewWidth
                       ? "auto"
                       : seekPreview.offset,
                   right:
                     seekPreview.offset >
-                    (seekRef.current?.offsetWidth || 0) - 16
+                    (seekRef.current?.offsetWidth || 0) - seekPreviewWidth
                       ? 0
                       : "auto",
                   transform:
-                    seekPreview.offset < 16 ||
+                    seekPreview.offset < seekPreviewWidth ||
                     seekPreview.offset >
-                      (seekRef.current?.offsetWidth || 0) - 16
+                      (seekRef.current?.offsetWidth || 0) - seekPreviewWidth
                       ? "none"
                       : "translateX(-50%)",
                 }}
               >
-                {formatVideoTime(seekPreview.time)}
+                {thumbnail?.frames && (<div style={{backgroundPositionX: -160*seekPreview.thumbnailIndex,backgroundSize:`calc(${thumbnail?.frames}*160px) 90px`,backgroundImage:`url(${thumbnail?.url})`}} className="tuby-seek-preview-image"/>)}
+                <br/>{getChapterName(seekPreview.time, chapters||[])}<br/>{formatVideoTime(seekPreview.time)}
               </div>
             )}
           </div>
@@ -588,6 +587,8 @@ const Player: FC<PlayerProps> = ({
                 {formatVideoTime(currentTime)}
                 {" / "}
                 {formatVideoTime(duration)}
+                {currentTime > 0 && currentTime < duration && chapters != null && (<><span style={{margin:'0px 5px'}}> • </span>
+                <span>{getChapterName(currentTime, chapters||[])}</span></> ) }
               </div>
             </div>
 

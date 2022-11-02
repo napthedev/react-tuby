@@ -14,5 +14,22 @@ export const formatVideoTime = (time: number) => {
   }
 };
 
+export const getChapterName = (time: number,chapters:{
+  startTime:number;
+  endTime:number;
+  name:string;
+}[]) => {
+  try {
+    for (const chapter of chapters) {
+      if(chapter.startTime<time&&chapter.endTime>time){
+        return chapter.name
+      }
+    }
+    return "";
+  } catch (error) {
+    return "";
+  }
+};
+
 export const isMobile = () =>
   /iPhone|iPad|iPod|Android/i.test(window?.navigator?.userAgent);
