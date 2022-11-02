@@ -69,6 +69,8 @@ const Player: FC<PlayerProps> = ({
 
   const [pauseDidUpdate, setPauseDidUpdate] = useState(false);
 
+  const seekPreviewWidth = thumbnail?80:16;
+
   const myRef = useRef<HTMLVideoElement>(null);
   const playerRef = passedDownRef || myRef;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -500,21 +502,21 @@ const Player: FC<PlayerProps> = ({
                 className="tuby-seek-preview"
                 style={{
                   left:
-                    seekPreview.offset < 80
+                    seekPreview.offset < seekPreviewWidth
                       ? 0
                       : seekPreview.offset >
-                        (seekRef.current?.offsetWidth || 0) - 80
+                        (seekRef.current?.offsetWidth || 0) - seekPreviewWidth
                       ? "auto"
                       : seekPreview.offset,
                   right:
                     seekPreview.offset >
-                    (seekRef.current?.offsetWidth || 0) - 80
+                    (seekRef.current?.offsetWidth || 0) - seekPreviewWidth
                       ? 0
                       : "auto",
                   transform:
-                    seekPreview.offset < 80 ||
+                    seekPreview.offset < seekPreviewWidth ||
                     seekPreview.offset >
-                      (seekRef.current?.offsetWidth || 0) - 80
+                      (seekRef.current?.offsetWidth || 0) - seekPreviewWidth
                       ? "none"
                       : "translateX(-50%)",
                 }}
