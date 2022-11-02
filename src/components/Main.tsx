@@ -585,6 +585,8 @@ const Player: FC<PlayerProps> = ({
                 {formatVideoTime(currentTime)}
                 {" / "}
                 {formatVideoTime(duration)}
+                {currentTime > 0 && chapters != null && (<><span style={{margin:'0px 5px'}}> • </span>
+                <span>{getChapterName(currentTime, chapters||[])}</span></> ) }
               </div>
             </div>
 
