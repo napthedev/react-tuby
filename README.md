@@ -97,7 +97,7 @@ import "react-tuby/css/main.css";
 | **pictureInPicture**     | boolean                                                                                                                        | Show picture in picture button                                                                         |
 | **keyboardShortcut**     | boolean \| { pause?: boolean; rewind?: boolean; forward?: boolean; fullScreen?: boolean; mute?: boolean; subtitle?: boolean; } | Customize keyboard shortcuts                                                                           |
 | **chapters**     | { startTime:number;endTime:number;name:string; }[]                                                                                                                      | Array of chapters
-| **thumbnail**     | { url:string;width:number;height:number;height:number;frames:number; }                                                                                                                     | Thumbnails info. All pictures need to be stitched into a row.
+| **thumbnail**     | { url:string;width:number;height:number;frames:number; }                                                                                                                     | Thumbnails info. All pictures need to be stitched into a row.
 
 ## Examples
 
