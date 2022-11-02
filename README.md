@@ -77,6 +77,7 @@ import "react-tuby/css/main.css";
   ]}
   poster="https://cdn.jsdelivr.net/gh/naptestdev/video-examples@master/poster.png"
   chapters={[{startTime:0,endTime:30,name:'chapter1'},{startTime:30,endTime:183,name:'chapter2'}]}
+  thumbnail={url:'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-28b21827-dcf2-495f-8477-6d8cd79b4872/2726e15d-0276-4cd8-a82f-4b28586105ca.jpeg',width:80,height:45,frames:185}
 />
 ```
 
@@ -96,6 +97,7 @@ import "react-tuby/css/main.css";
 | **pictureInPicture**     | boolean                                                                                                                        | Show picture in picture button                                                                         |
 | **keyboardShortcut**     | boolean \| { pause?: boolean; rewind?: boolean; forward?: boolean; fullScreen?: boolean; mute?: boolean; subtitle?: boolean; } | Customize keyboard shortcuts                                                                           |
 | **chapters**     | { startTime:number;endTime:number;name:string; }[]                                                                                                                      | Array of chapters
+| **thumbnail**     | { url:string;width:number;height:number;height:number;frames:number; }                                                                                                                     | Thumbnails info. All pictures need to be stitched into a row.
 
 ## Examples
 

@@ -80,13 +80,24 @@
 
     &-preview {
       position: absolute;
-      top: -24px;
+      // top: -54px;
+      line-height: 14px;
+      bottom: 80px;
       font-size: 12px;
-      background: #000000b6;
-      color: #fff;
-      padding: 3px 7px;
+      text-align: center;
+      // background: #000000b6;
+      color: #eee;
+      text-shadow: 0 0 4px rgb(0 0 0 / 75%);
+      // padding: 3px 7px;
       pointer-events: none;
       animation: tuby-fade-forward 0.2s forwards;
+      &-image {
+        width: 160px;
+        height: 90px;
+        margin-bottom: -6px;
+        border: #eee 2px solid;
+        background-position-y: -0px;
+      }
     }
   }
 }

@@ -1,5 +1,5 @@
 import React, { FC, HTMLProps, useEffect, useRef, useState } from "react";
-import { formatVideoTime, isMobile } from "../shared/utils";
+import { formatVideoTime, isMobile, getChapterName } from "../shared/utils";
 
 import CircularProgress from "./Icons/CircularProgress";
 import ClickAwayListener from "./ClickAwayListener";
@@ -33,6 +33,7 @@ const Player: FC<PlayerProps> = ({
   pictureInPicture = false,
   keyboardShortcut = true,
   chapters,
+  thumbnail,
 }) => {
   const [quality, setQuality] = useState(0);
   const [playbackSpeed, setPlaybackSpeed] = useState(
@@ -50,6 +51,7 @@ const Player: FC<PlayerProps> = ({
   const [seekPreview, setSeekPreview] = useState<null | {
     time: number;
     offset: number;
+    thumbnailIndex: number;
   }>(null);
 
   const [loadedData, setLoadedData] = useState(false);
@@ -132,10 +134,11 @@ const Player: FC<PlayerProps> = ({
     if (isNaN(newTime)) setSeekPreview(null);
 
     if (newTime < 0) newTime = 0;
-
+    let time = Math.round(newTime);
     setSeekPreview({
-      time: Math.round(newTime),
+      time: time,
       offset: offsetInPixel,
+      thumbnailIndex:thumbnail?.frames?Math.round(time/duration*thumbnail?.frames):-1
     });
   };
 
@@ -497,26 +500,27 @@ const Player: FC<PlayerProps> = ({
                 className="tuby-seek-preview"
                 style={{
                   left:
-                    seekPreview.offset < 16
+                    seekPreview.offset < 80
                       ? 0
                       : seekPreview.offset >
-                        (seekRef.current?.offsetWidth || 0) - 16
+                        (seekRef.current?.offsetWidth || 0) - 80
                       ? "auto"
                       : seekPreview.offset,
                   right:
                     seekPreview.offset >
-                    (seekRef.current?.offsetWidth || 0) - 16
+                    (seekRef.current?.offsetWidth || 0) - 80
                       ? 0
                       : "auto",
                   transform:
-                    seekPreview.offset < 16 ||
+                    seekPreview.offset < 80 ||
                     seekPreview.offset >
-                      (seekRef.current?.offsetWidth || 0) - 16
+                      (seekRef.current?.offsetWidth || 0) - 80
                       ? "none"
                       : "translateX(-50%)",
                 }}
               >
-                {formatVideoTime(seekPreview.time)}
+                {thumbnail?.frames && (<div style={{backgroundPositionX: -160*seekPreview.thumbnailIndex,backgroundSize:`calc(${thumbnail?.frames}*160px) 90px`,backgroundImage:`url(${thumbnail?.url})`}} className="tuby-seek-preview-image"/>)}
+                <br/>{getChapterName(seekPreview.time, chapters||[])}<br/>{formatVideoTime(seekPreview.time)}
               </div>
             )}
           </div>

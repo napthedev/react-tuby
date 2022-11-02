@@ -31,6 +31,12 @@ export interface PlayerProps {
     url: string;
   }[];
   dimensions?: number | { width: number | string; height: number | string };
+  thumbnail?:{
+    url: string;
+    width: number;
+    height: number;
+    frames: number;
+  };
   primaryColor?: string;
   poster?: string;
   seekDuration?: number;
