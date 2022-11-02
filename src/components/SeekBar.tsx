@@ -19,22 +19,22 @@ const SeekBar: FC<SeekBarProps> = ({
                 {chapters.map((data) => {
                     return (
                         <div key={data.name} className="tuby-seek-wrapper-bar" style={{ width: `${Math.round(((data.endTime - data.startTime) / duration) * 1000) / 10}%`, marginRight: 4 }}>
-                            {
-
-                                <div
-                                    style={{
-                                        width:
-                                            currentTime > data.endTime
-                                                ? '100%' :
-                                                currentTime > data.startTime
-                                                    ? `${Math.round(((currentTime - data.startTime) / (data.endTime - data.startTime)) * 1000) / 10}%`
-                                                    : 0,
-                                    }}
-                                    className={currentTime> data.startTime&&currentTime< data.endTime&&seekPreviewTime>-1?(seekPreviewTime> data.startTime&&seekPreviewTime< data.endTime?"tuby-seek-wrapper-bar-left1":"tuby-seek-wrapper-bar-left2"):"tuby-seek-wrapper-bar-left"}
-                                ></div>
-
-
-                            }
+                            <div
+                                style={{
+                                    width:
+                                        currentTime > data.endTime
+                                            ? '100%' :
+                                            currentTime > data.startTime
+                                                ? `${Math.round(((currentTime - data.startTime) / (data.endTime - data.startTime)) * 1000) / 10}%`
+                                                : 0,
+                                }}
+                                className={currentTime> data.startTime&&currentTime< data.endTime&&seekPreviewTime>-1?(seekPreviewTime> data.startTime&&seekPreviewTime< data.endTime?"tuby-seek-wrapper-bar-left1":"tuby-seek-wrapper-bar-left2"):"tuby-seek-wrapper-bar-left"}
+                            ></div>
+                            <div className="tuby-seek-wrapper-bar-preview" style={{ width: seekPreviewTime > data.endTime
+                                            ? '100%' :
+                                            seekPreviewTime > data.startTime
+                                                ? `${Math.round(((seekPreviewTime - data.startTime) / (data.endTime - data.startTime)) * 1000) / 10}%`
+                                                : 0,}}></div>
 
                         </div>)
                 })}
