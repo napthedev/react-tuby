@@ -26,6 +26,7 @@ const Player: FC<PlayerProps> = ({
   subtitles,
   children,
   poster,
+  posterAlt,
   seekDuration = 10,
   internationalization,
   playerRef: passedDownRef,
@@ -424,7 +425,7 @@ const Player: FC<PlayerProps> = ({
   return (
     <>
       {poster && !pauseDidUpdate && (
-        <img src={poster} className="tuby-poster" alt="Tuby Poster" />
+        <img src={poster} className="tuby-poster" alt={posterAlt||"React Tuby"} />
       )}
       <div
         ref={containerRef}
