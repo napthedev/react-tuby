@@ -33,6 +33,7 @@ export interface PlayerProps {
   dimensions?: number | { width: number | string; height: number | string };
   primaryColor?: string;
   poster?: string;
+  posterAlt:string;
   seekDuration?: number;
   internationalization?: Internationalization;
   pictureInPicture?: boolean;
